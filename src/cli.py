@@ -2,11 +2,13 @@
 from __future__ import annotations
 
 import io
+import os
 from base64 import b64decode
 from pathlib import Path
 
 import click
 import openai
+from mastodon import Mastodon
 from PIL import Image
 from rich import print
 from wonderwords import RandomWord
@@ -26,8 +28,10 @@ def cli(output):
     adjective = get_random_adjective(black_list)
 
     # Get an image
-    print(f"Generating image for {adjective}")
-    prompt = f"""A {adjective} pigeon in New York City, Nikon D7500, Sigma 18-300, ISO 100, f/10.0, 50mm, 1/400s"""
+    prompt = f"""A {adjective} pigeon in New York City, Sigma 300mm f/10.0"""
+
+    # Get the image
+    print(f"Generating image with the following prompt: '{prompt}'")
     image = get_pigeon_polaroid(prompt)
 
     # Compose the output path
@@ -40,6 +44,21 @@ def cli(output):
     # Write it out
     print(f"Saving image to {filepath}")
     image.save(filepath)
+
+    # Post to Mastodon
+    print("Posting to Mastodon")
+    api = Mastodon(
+        client_id=os.getenv("MASTODON_CLIENT_KEY"),
+        client_secret=os.getenv("MASTODON_CLIENT_SECRET"),
+        access_token=os.getenv("MASTODON_ACCESS_TOKEN"),
+        api_base_url="https://mastodon.palewi.re",
+    )
+    media_obj = api.media_post(
+        filepath,
+        description=f"A fictional image created by OpenAI's DALL-E 3 text-to-image model when given the following prompt: '{prompt}'",
+    )
+    post = api.status_post(adjective.capitalize(), media_ids=media_obj["id"])
+    print(f"Posted to Mastodon: '{post['url']}'")
 
 
 def get_random_adjective(black_list: list) -> str:
@@ -82,7 +101,8 @@ def get_pigeon_polaroid(prompt: str) -> Image:
     response = client.images.generate(
         model="dall-e-3",
         prompt=prompt,
-        size="1024x1024",
+        # size="1024x1024",
+        size="1792x1024",
         quality="hd",
         style="natural",
         n=1,

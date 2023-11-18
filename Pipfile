@@ -34,6 +34,7 @@ click = "*"
 rich = "*"
 pillow = "*"
 wonderwords = "*"
+"mastodon.py" = "*"
 
 [requires]
 python_version = "3.10"
