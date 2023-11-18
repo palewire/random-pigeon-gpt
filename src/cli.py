@@ -64,7 +64,7 @@ def get_pigeon_polaroid(adjective: str) -> Image:
     client = openai.OpenAI()
 
     # Prepare our prompt
-    prompt = f"""A full-bleed, color image of a {adjective} pigeon in New York City. The pigeon should dominate the foreground, rendered realistically with its details captured meticulously. No text. Nothing outside the image. Realistic nature photography."""
+    prompt = f"""A full-bleed, color image of a {adjective} pigeon in New York City. The pigeon should dominate the foreground and be rendered realistically, its details captured meticulously. No text. Nothing outside the image. Realistic nature photography."""
 
     # Request an image from the API
     response = client.images.generate(
