@@ -28,7 +28,7 @@ def cli(output):
     adjective = get_random_adjective(black_list)
 
     # Get an image
-    prompt = f"""A {adjective} pigeon in New York City, Sigma 300mm f/10.0"""
+    prompt = f"""A portrait of a {adjective} pigeon in New York City"""
 
     # Get the image
     print(f"Generating image with the following prompt: '{prompt}'")
@@ -101,7 +101,6 @@ def get_pigeon_polaroid(prompt: str) -> Image:
     response = client.images.generate(
         model="dall-e-3",
         prompt=prompt,
-        # size="1024x1024",
         size="1792x1024",
         quality="hd",
         style="natural",
