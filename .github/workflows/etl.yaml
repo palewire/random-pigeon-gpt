@@ -32,7 +32,7 @@ jobs:
         shell: bash
 
       - name: Generate image
-        run: pipenv run python -m src.cli -o ./img
+        run: pipenv run python -m src.cli
         shell: bash
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

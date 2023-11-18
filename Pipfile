@@ -33,6 +33,7 @@ openai = "*"
 click = "*"
 rich = "*"
 pillow = "*"
+wonderwords = "*"
 
 [requires]
 python_version = "3.10"
