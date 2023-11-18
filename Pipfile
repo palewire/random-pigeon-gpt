@@ -32,7 +32,6 @@ exceptiongroup = "*"
 openai = "*"
 click = "*"
 rich = "*"
-requests = "*"
 pillow = "*"
 
 [requires]
