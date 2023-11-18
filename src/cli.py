@@ -1,4 +1,4 @@
-"""Use AI to generate New York City pigeons using a random adjective."""
+"""Use AI to generate images of New York City pigeons using a random adjective."""
 from __future__ import annotations
 
 import io
@@ -15,7 +15,7 @@ from wonderwords import RandomWord
 @click.command()
 @click.option("--output", "-o", default="./img/")
 def cli(output):
-    """Use AI to generate New York City pigeons using a random adjective."""
+    """Use AI to generate an image of a New York City pigeon using a random adjective."""
     # Set our output directory
     output_dir = Path(output)
 
@@ -27,7 +27,7 @@ def cli(output):
 
     # Get an image
     print(f"Generating image for {adjective}")
-    prompt = f"""A full-bleed, color image of a {adjective} pigeon in New York City. The pigeon should dominate the foreground and be rendered realistically, its details captured meticulously. No text. Nothing outside the image. Realistic nature photography."""
+    prompt = f"""A {adjective} pigeon in New York City, Nikon D7500, Sigma 18-300, ISO 100, f/10.0, 50mm, 1/400s"""
     image = get_pigeon_polaroid(prompt)
 
     # Compose the output path
