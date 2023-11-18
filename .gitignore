@@ -1,4 +1,5 @@
 .DS_Store
+img/*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
