@@ -38,7 +38,7 @@ def cli(output):
     filepath.parent.mkdir(parents=True, exist_ok=True)
 
     # Write it out
-    print(f"Saving image to {filepath}...")
+    print(f"Saving image to {filepath}")
     image.save(filepath)
 
 
