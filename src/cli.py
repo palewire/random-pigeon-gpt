@@ -28,11 +28,14 @@ def cli(output):
     prompt = f"""A full-bleed, color image of a {adjective} pigeon in New York City. The pigeon should dominate the foreground and be rendered realistically, its details captured meticulously. No text. Nothing outside the image. Realistic nature photography."""
     image = get_pigeon_polaroid(prompt)
 
-    # Write it out to the filesystem
-    # with the timestamp as the file name
+    # Compose the output path
     filename = f"{adjective}.png"
     filepath = output_dir / filename
+
+    # Make sure the parent directory exists
     filepath.parent.mkdir(parents=True, exist_ok=True)
+
+    # Write it out
     print(f"Saving image to {filepath}...")
     image.save(filepath)
 
@@ -59,7 +62,17 @@ def get_random_adjective(black_list: list) -> str:
 
 
 def get_pigeon_polaroid(prompt: str) -> Image:
-    """Generate a Polaroid-style photograph of a pigeon in Manhattan."""
+    """Generate a Polaroid-style photograph of a pigeon in Manhattan.
+
+    Args
+    ----
+    prompt (str)
+        The instructions to pass to to OpenAI's API
+
+    Returns
+    -------
+    A PIL Image object that's ready to work with.
+    """
     # Connect to OpenAI
     client = openai.OpenAI()
 
