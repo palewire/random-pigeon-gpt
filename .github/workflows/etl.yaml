@@ -1,0 +1,49 @@
+name: Extract, transform and load
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '0 0,12 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    name: Scrape
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pipenv'
+
+      - name: Install pipenv
+        run: curl https://raw.githubusercontent.com/pypa/pipenv/master/get-pipenv.py | python
+        shell: bash
+
+      - id: install-python-dependencies
+        name: Install Python dependencies
+        run: pipenv sync
+        shell: bash
+
+      - name: Generate image
+        run: pipenv run python -m src.cli -o ./img
+        shell: bash
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Commit results
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "actions@github.com"
+          git config pull.rebase false
+          git status
+          git pull origin $GITHUB_REF
+          git add ./img
+          git commit -m "Generate image" --author="palewire <palewire@users.noreply.github.com>" && git push || true
+        shell: bash
