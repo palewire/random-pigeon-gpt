@@ -36,15 +36,16 @@ def get_pigeon_polaroid() -> Image:
     client = openai.OpenAI()
 
     # Prepare our prompt
-    prompt = """A close-up image that captures the essence of a pigeon in Manhattan. The image should evoke feelings from the 1970s and underground amateur photography, with the nostalgic charm similar to that of Polaroids. There should be colors but they should be washed out in the style of instant cameras like the Polaroid 635 Supercolor and the Fujifilm Instax. The city's skyline and parks can be subtly hinted at in the background, infusing subtle urban elements into the frame. The pigeon should dominate the foreground, its details captured meticulously. The image should fill the entire space with no frame and not border around it."""
+    prompt = """A close-up image that captures the essence of a pigeon. The image evokes feelings from the 1970s with nostalgic charm similar to photographs taken by Polaroid instant cameras. The Manhattan skyline can be subtly hinted at in the background, infusing subtle urban elements into the frame. The pigeon should dominate the foreground, its details captured meticulously. There should be no visible text."""
 
     # Request an image from the API
     response = client.images.generate(
         model="dall-e-3",
+        # prompt=prompt,
         prompt=prompt,
         size="1024x1024",
         quality="hd",
-        style="vivid",
+        style="natural",
         n=1,
         response_format="b64_json",
     )
