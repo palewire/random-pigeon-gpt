@@ -52,7 +52,9 @@ def get_pigeon_polaroid() -> Image:
     print("...image generated.")
 
     # Write to an in-memory PIL object
-    bytes = b64decode(response.data[0].b64_json)
+    data = response.data[0].b64_json
+    assert isinstance(data, str)
+    bytes = b64decode(data)
     image = Image.open(io.BytesIO(bytes))
 
     # Return that object
