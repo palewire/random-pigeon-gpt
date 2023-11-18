@@ -21,11 +21,8 @@ def cli(output):
     # Set our output directory
     output_dir = Path(output)
 
-    # Get a list of all file stems in the output directory
-    black_list = [p.stem for p in output_dir.glob("*.png")]
-
     # Get a random adjective that hasn't already been done
-    adjective = get_random_adjective(black_list)
+    adjective = get_random_adjective()
 
     # Get an image
     prompt = f"""A portrait of a {adjective} pigeon in New York City"""
@@ -61,13 +58,8 @@ def cli(output):
     print(f"Posted to Mastodon: '{post['url']}'")
 
 
-def get_random_adjective(black_list: list) -> str:
+def get_random_adjective() -> str:
     """Get a random adjective.
-
-    Args
-    ----
-    black_list (list)
-        Words to exclude from selection
 
     Returns
     -------
@@ -75,11 +67,7 @@ def get_random_adjective(black_list: list) -> str:
     """
     # Get a random adjective
     r = RandomWord()
-    while True:
-        adjective = r.word(include_parts_of_speech=["adjectives"])
-        if adjective not in black_list:
-            break
-    return adjective
+    return r.word(include_parts_of_speech=["adjectives"])
 
 
 def get_pigeon_polaroid(prompt: str) -> Image:
