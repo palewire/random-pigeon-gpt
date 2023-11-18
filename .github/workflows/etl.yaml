@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  scrape:
-    name: Scrape
+  generate:
+    name: Generate
     runs-on: ubuntu-latest
     steps:
       - id: checkout
