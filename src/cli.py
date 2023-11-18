@@ -21,6 +21,8 @@ def cli(output):
 
     # Get a list of all file stems in the output directory
     black_list = [p.stem for p in output_dir.glob("*.png")]
+
+    # Get a random adjective that hasn't already been done
     adjective = get_random_adjective(black_list)
 
     # Get an image
