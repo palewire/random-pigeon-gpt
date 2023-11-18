@@ -24,7 +24,9 @@ def cli(output):
     adjective = get_random_adjective(black_list)
 
     # Get an image
-    image = get_pigeon_polaroid(adjective)
+    print(f"Generating image for {adjective}")
+    prompt = f"""A full-bleed, color image of a {adjective} pigeon in New York City. The pigeon should dominate the foreground and be rendered realistically, its details captured meticulously. No text. Nothing outside the image. Realistic nature photography."""
+    image = get_pigeon_polaroid(prompt)
 
     # Write it out to the filesystem
     # with the timestamp as the file name
@@ -56,15 +58,10 @@ def get_random_adjective(black_list: list) -> str:
     return adjective
 
 
-def get_pigeon_polaroid(adjective: str) -> Image:
+def get_pigeon_polaroid(prompt: str) -> Image:
     """Generate a Polaroid-style photograph of a pigeon in Manhattan."""
-    print(f"Generating image for '{adjective}'")
-
     # Connect to OpenAI
     client = openai.OpenAI()
-
-    # Prepare our prompt
-    prompt = f"""A full-bleed, color image of a {adjective} pigeon in New York City. The pigeon should dominate the foreground and be rendered realistically, its details captured meticulously. No text. Nothing outside the image. Realistic nature photography."""
 
     # Request an image from the API
     response = client.images.generate(
