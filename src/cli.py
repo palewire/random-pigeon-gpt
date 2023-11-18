@@ -25,7 +25,7 @@ def cli(output):
     adjective = get_random_adjective()
 
     # Get an image
-    prompt = f"""A portrait of a {adjective} pigeon in New York City"""
+    prompt = f"A portrait of a {adjective} pigeon in New York City"
 
     # Get the image
     print(f"Generating image with the following prompt: '{prompt}'")
