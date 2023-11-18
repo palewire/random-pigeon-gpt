@@ -36,7 +36,7 @@ def get_pigeon_polaroid() -> Image:
     client = openai.OpenAI()
 
     # Prepare our prompt
-    prompt = """A close-up image that captures the essence of a pigeon. The image evokes feelings from the 1970s with nostalgic charm similar to photographs taken by Polaroid instant cameras. The Manhattan skyline can be subtly hinted at in the background, infusing subtle urban elements into the frame. The pigeon should dominate the foreground, its details captured meticulously. There should be no visible text."""
+    prompt = """A full-bleed, close-up image that captures the essence of a pigeon. The image evokes feelings from the 1970s film with nostalgic charm. The Manhattan skyline can be subtly hinted at in the background, infusing subtle urban elements into the frame. The pigeon should dominate the foreground, its details captured meticulously. There should be no visible text."""
 
     # Request an image from the API
     response = client.images.generate(
