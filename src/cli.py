@@ -41,7 +41,6 @@ def get_pigeon_polaroid() -> Image:
     # Request an image from the API
     response = client.images.generate(
         model="dall-e-3",
-        # prompt=prompt,
         prompt=prompt,
         size="1024x1024",
         quality="hd",
