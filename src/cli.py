@@ -29,7 +29,7 @@ def cli(output):
 
     # Get the image
     print(f"Generating image with the following prompt: '{prompt}'")
-    image = get_pigeon_polaroid(prompt)
+    image = get_pigeon_image(prompt)
 
     # Compose the output path
     filename = f"{adjective}.png"
@@ -70,8 +70,8 @@ def get_random_adjective() -> str:
     return r.word(include_parts_of_speech=["adjectives"])
 
 
-def get_pigeon_polaroid(prompt: str) -> Image:
-    """Generate a Polaroid-style photograph of a pigeon in Manhattan.
+def get_pigeon_image(prompt: str) -> Image:
+    """Generate an image of a pigeon in New York City.
 
     Args
     ----
